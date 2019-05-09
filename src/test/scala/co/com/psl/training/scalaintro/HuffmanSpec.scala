@@ -43,7 +43,7 @@ class HuffmanSpec extends BaseSpec {
 
   it should "extract the chars of a Tree" in {
     val t1 = Leaf(char   = 'x', weight = 3)
-    val t2 = Fork(
+    val t2 : CodeTree = Fork(
       left   = Leaf(char   = 'x', weight = 3),
       right  = Leaf(char   = 'z', weight = 2),
       chars  = List('x', 'z'),
@@ -79,4 +79,14 @@ class HuffmanSpec extends BaseSpec {
 
     decoded shouldBe message
   }
+
+  it should "encode and decode text Quick" in {
+    val message = "Hello, World!".toList
+    val tree = createCodeTree(message)
+    val encoded = quickEncode(tree)(message)
+    val decoded = decode(tree)(encoded)
+
+    decoded shouldBe message
+  }
+
 }
